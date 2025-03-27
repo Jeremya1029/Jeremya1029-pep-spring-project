@@ -22,6 +22,11 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    public boolean userExists(Integer id)
+    {
+        return accountRepository.findById(id).isPresent();
+    }
+
     public boolean usernameExists(String username) {
         return accountRepository.findByUsername(username).isPresent();
     }
