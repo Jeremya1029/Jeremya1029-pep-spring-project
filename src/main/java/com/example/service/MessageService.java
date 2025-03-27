@@ -57,7 +57,7 @@ public class MessageService {
     {
         if(newMessageText.isBlank() || newMessageText.length() > 255)
             return 0;
-            
+
         Optional<Message> optionalMessage = messageRepository.findById(id);
         if(optionalMessage.isPresent())
         {
@@ -67,5 +67,16 @@ public class MessageService {
             return 1;
         }
         return 0;
+    }
+    public List<Message> getMessagesByUserId(Integer id)
+    {
+        Optional<List<Message>> optionalMessage = messageRepository.findMessagesByPostedBy(id);
+        if(optionalMessage.isPresent())
+        {
+            List<Message> messages = optionalMessage.get();
+            return messages;
+        }
+
+        return null;
     }
 }
