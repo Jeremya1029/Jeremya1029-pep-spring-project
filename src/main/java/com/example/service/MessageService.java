@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.entity.Account;
 import com.example.entity.Message;
 import com.example.repository.MessageRepository;
 
@@ -27,5 +28,8 @@ public class MessageService {
         
 
         return messageRepository.save(message);
+    }
+    public List<Message> getAllMessages() {
+        return messageRepository.findAll();
     }
 }
