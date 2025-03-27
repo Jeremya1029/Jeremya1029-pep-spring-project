@@ -9,6 +9,7 @@ import com.example.entity.Account;
 import com.example.repository.AccountRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -36,6 +37,18 @@ public class AccountService {
         }
 
         return accountRepository.save(account);
+    }
+
+    public Account loginAccount(Account account)
+    {
+        Optional<Account> optionalAccount = accountRepository.findByUsername(account.getUsername());
+        if(optionalAccount.isPresent())
+        {
+            Account repoAccount = optionalAccount.get();
+            if(repoAccount.getUsername().equals(account.getUsername()) && repoAccount.getPassword().equals(account.getPassword()))
+                return repoAccount;
+        }
+        return null;
     }
 
     public List<Account> getAllAccounts() {
