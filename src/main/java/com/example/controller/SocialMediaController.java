@@ -84,5 +84,15 @@ public class SocialMediaController {
 
         return ResponseEntity.ok().build();
     }
+    @PatchMapping("/messages/{message_id}")
+    public ResponseEntity<Integer> updateMessageById(@PathVariable Integer message_id, @RequestBody String messageText)
+    {
+        Integer result = messageService.updateMessageById(message_id, messageText);
+        if(result == 1)
+            return ResponseEntity.ok().body(result);
+
+
+        return ResponseEntity.status(400).build();
+    }
 
 }
