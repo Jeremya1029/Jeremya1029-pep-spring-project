@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -85,8 +86,11 @@ public class SocialMediaController {
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/messages/{message_id}")
-    public ResponseEntity<Integer> updateMessageById(@PathVariable Integer message_id, @RequestBody String messageText)
+    public ResponseEntity<Integer> updateMessageById(@PathVariable Integer message_id, @RequestBody Map<String, String> body)
     {
+        String messageText = body.get("messageText");
+
+
         Integer result = messageService.updateMessageById(message_id, messageText);
         if(result == 1)
             return ResponseEntity.ok().body(result);
